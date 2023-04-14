@@ -65,7 +65,7 @@ function Test() {
             'http://localhost:3001/upload',
             formData,
           );
-          console.log('Image uploaded successfully!', response.data);
+          console.log('Form Data uploaded successfully!', response.data);
           navigate('/display');
         } catch (error) {
           if (error.response.status === 400) {
