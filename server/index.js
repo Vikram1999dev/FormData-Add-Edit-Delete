@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 mongoose.set('strictQuery', false);
 
 //setting up api that connect this application to mongodb atlas
-mongoose.connect('mongodb+srv://xxxxxx.xxxxxxxx.xxxxxxxxxxx', {
+mongoose.connect('mongodb+srv://vikram:Markiv@cluster0.rjyumeo.mongodb.net', {
   dbName: 'formDatabase',
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -77,10 +77,9 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 
 app.get('/grabformdata', async (req, res) => {
   try {
-    // Find all images in the database
+    // Find all data in the database
     const everyFormData = await FormData.find().exec();
 
-    // Create an array of image data URLs
     const Formss = everyFormData.map((x) => {
       const data = x.data.toString('base64');
       return {
@@ -89,10 +88,9 @@ app.get('/grabformdata', async (req, res) => {
       };
     });
 
-    // Send the image data URLs as a response
-
-    // console.log(Formss);
-    res.status(200).json(Formss);
+    // Send the image data URLs along with
+    //all the data
+    res.status(200).send(Formss);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
